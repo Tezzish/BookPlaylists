@@ -30,7 +30,7 @@ def results(request):
         #print(str)
         #bookresults = Books.objects.filter(Q(book_name__iregex=str) | Q(book_authorName__iregex=str)).values()
         str = "'%" + str + "%'"
-        bookresults = Books.objects.raw("SELECT * FROM bookPlaylists_books WHERE book_name LIKE"+str)
+        bookresults = Books.objects.raw("SELECT * FROM bookPlaylists_books WHERE book_name LIKE "+str  + "OR book_authorName LIKE " + str)
         template = loader.get_template('results.html')
         context = {
             'bookresults': bookresults,
