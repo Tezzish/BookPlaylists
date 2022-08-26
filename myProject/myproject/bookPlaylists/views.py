@@ -4,6 +4,8 @@ from django.template import loader
 from .models import Books
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.db.models import Q
+import re
 
 #loads the index page
 def index(request):
@@ -12,21 +14,34 @@ def index(request):
 
 #takes the user to the results page
 def results(request):
-    if(request.method == 'GET'):
+
+    str = request.POST['value']
+    print(str)
+    if str == "":
         bookresults = Books.objects.all().values()
         template = loader.get_template('results.html')
         context = {
             'bookresults': bookresults,
         }
-        print("OH OUI")
         return HttpResponse(template.render(context, request))
     else:
-        print("OH NON")
+        #str = ".*" + str + ".*"
+        #str = repr(str)
+        #print(str)
+        #bookresults = Books.objects.filter(Q(book_name__iregex=str) | Q(book_authorName__iregex=str)).values()
+        str = "'%" + str + "%'"
+        bookresults = Books.objects.raw("SELECT * FROM bookPlaylists_books WHERE book_name LIKE"+str)
+        template = loader.get_template('results.html')
+        context = {
+            'bookresults': bookresults,
+        }
+        return HttpResponse(template.render(context, request))
+    
 
 #takes the user to the add page
 def add(request):
     template = loader.get_template('add.html')
-    return HttpResponse(template.render({}, request))
+    return HttpResponse(template.render({}, requeGETst))
 
 #used to add a book, x is the book name, y is the book author
 def addrecord(request):

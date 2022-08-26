@@ -12,11 +12,11 @@
     <div class = "flex-container" id="papa-div">
         <div class = "flex-container" id = "search-container">
             <!--the search bar element-->
-            <form class="flex-container">
+            <form action = "results/" class="flex-container" method = "post">
                 {% csrf_token %}
-                <input type="text" class = "search-bar" id = "search-input" placeholder="Search by book name or author last name" autocomplete="on">
+                <input name = "value" type="text" class = "search-bar" id = "search-input" placeholder="Search by book name or author last name" autocomplete="on">
                 <!--the search bar button-->
-                <input type="image" value = "Search" class = "search-bar" id="search-button" src = "../static/cropped">    
+                <input type="image" value = "Search" class = "search-bar" id="search-button" src = "../static/cropped" href="results/">    
             </form>
         </div>
     </div>

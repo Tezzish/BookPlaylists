@@ -18,6 +18,7 @@ from django.urls import include, path
 
 #include uses bookPlaylists. for the path
 urlpatterns = [
+    path('', include('bookPlaylists.urls')),
     path('admin/', admin.site.urls),
-    path('', include('bookPlaylists.urls'))
+    path('__debug__/', include('debug_toolbar.urls'))
 ]
