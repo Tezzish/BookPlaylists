@@ -16,9 +16,10 @@
         <!--loops through the results found and displays them-->
         <!--bookresults is defined in views.py in the results function-->
         {% for x in bookresults %}
-        <tr id = "tableHolder">
-            <td class = "tableColumn">{{x.book_name}}</td>
-            <td class = "tableColumn">{{x.book_authorName}}</td>
+        <tr id = "table-holder">
+            <td class = "table-column">{{x.book_name}}</td>
+            <td class = "table-column">{{x.book_authorName}}</td>
+            <td><a href="../delete/{{ x.book_id }}">delete</a></td>
         </tr>
         {% endfor %}
         <!--takes the user to add a book-->
